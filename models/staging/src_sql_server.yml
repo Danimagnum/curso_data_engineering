@@ -17,9 +17,10 @@ sources:
 
     tables:
 
-      - name: address_id
+      - name: addresses
         loaded_at_field: _fivetran_synced
         columns:
+          - name: address_id
           - name: zipcode
           - name: country
           - name: address
@@ -60,7 +61,7 @@ sources:
           - name: _fivetran_deleted
           - name: _fivetran_synced
       
-      - name: oder_items
+      - name: order_items
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
