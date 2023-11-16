@@ -7,9 +7,9 @@ with src_promos as (
 stg_promos as (
 
     select
-        promo_id,
-        discount,
-        status,
+        promo_id::varchar(50),
+        discount::float,
+        status::varchar(50) as promos_status,
         _fivetran_deleted,
         _fivetran_synced AS date_load
 

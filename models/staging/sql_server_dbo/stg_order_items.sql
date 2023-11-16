@@ -7,9 +7,9 @@ with src_order_items as (
 stg_order_items as (
 
     select
-        order_id,
-        product_id,
-        quantity,
+        order_id::varchar(50),
+        product_id::varchar(50),
+        quantity::number(38,0),
         _fivetran_deleted,
         _fivetran_synced AS date_load
     from src_order_items
