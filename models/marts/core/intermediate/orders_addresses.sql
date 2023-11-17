@@ -14,7 +14,7 @@ stg_orders_addresses as (
         a.shipping_service,
         a.shipping_cost,
         a.address_id,
-        a.created_at,
+        a.order_created_at,
         a.promo_id,
         a.estimated_delivery_at,
         a.order_cost,

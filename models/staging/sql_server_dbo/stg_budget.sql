@@ -8,9 +8,9 @@ stg_budget as (
 
     select
         _row,
-        quantity,
-        month,
-        product_id,
+        quantity::number(38,0) as quantity,
+        month::timestamp_ntz as month,
+        product_id::Varchar(50) as product_id,
         _fivetran_synced AS date_load
 
     from src_budget

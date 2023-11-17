@@ -7,10 +7,10 @@ with src_products as (
 stg_products as (
 
     select
-        product_id::Varchar(50),
+        product_id::Varchar(50) as product_id,
         (replace(PRICE,',','.'))::decimal as price,
-        name::varchar(100),
-        inventory::number(38,0),
+        name::varchar(100) as name,
+        inventory::number(38,0) as inventory,
         _fivetran_deleted,
         _fivetran_synced AS date_load
 

@@ -24,7 +24,7 @@ stg_users_events as (
         b.event_type,
         b.product_id,
         b.session_id,
-        b.created_at,
+        b.events_created_at,
         b.order_id
     FROM stg_users a
     INNER JOIN stg_events b

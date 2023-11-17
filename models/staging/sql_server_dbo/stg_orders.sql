@@ -7,19 +7,19 @@ with src_orders as (
 stg_orders as (
 
     select
-        order_id::varchar(50),
-        shipping_service::varchar(20),
+        order_id::varchar(50) as order_id,
+        shipping_service::varchar(20) as shipping_service,
        (replace(SHIPPING_COST,',','.'))::decimal as shipping_cost,
-        address_id::varchar(50),
-        created_at::timestamp_ntz,
+        address_id::varchar(50) as address_id,
+        created_at::timestamp_ntz as order_created_at,
          IFNULL(promo_id,'N/A') as promo_id,
-        estimated_delivery_at::timestamp_ntz,
+        estimated_delivery_at::timestamp_ntz as estimated_delivery_at,
         (replace(ORDER_COST,',','.'))::decimal as order_cost,
-        user_id::varchar(50),
+        user_id::varchar(50) as user_id,
         (replace(ORDER_TOTAL,',','.'))::decimal as order_total,
-        delivered_at::timestamp_ntz,
-        tracking_id::varchar(50),
-        status::varchar(20),
+        delivered_at::timestamp_ntz as delivered_at,
+        tracking_id::varchar(50) as tracking_id,
+        status::varchar(20) as status,
         _fivetran_deleted,
         _fivetran_synced AS date_load
 
