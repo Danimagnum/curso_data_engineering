@@ -16,7 +16,6 @@ stg_users_addresses as (
         a.last_name,
         a.created_at,
         a.phone_number,
-        a.total_orders,
         a.first_name,
         a.email,
         b.zipcode,

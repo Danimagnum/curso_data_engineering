@@ -6,7 +6,12 @@ with src_time as (
 
 stg_time as (
 
-    select *
+    select 
+        date_day as dia,
+        day_of_week,
+        month_of_year,
+        year_number
+
         
     from src_time
 

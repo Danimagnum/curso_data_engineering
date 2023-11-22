@@ -12,6 +12,7 @@ stg_addresses as (
         country::VARCHAR(256) as country,
         address::VARCHAR(256) as address,
         state::VARCHAR(256) as state,
+        concat(zipcode,' ',country,' ',state,' ', address) as all_address,
         _fivetran_deleted,
         _fivetran_synced AS date_load
 

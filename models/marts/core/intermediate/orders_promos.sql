@@ -23,6 +23,7 @@ stg_orders_promos as (
         a.delivered_at,
         a.tracking_id,
         a.status,
+        b.promo_type
         b.discount,
         b.promos_status
     FROM stg_orders a
