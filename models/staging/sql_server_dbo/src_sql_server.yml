@@ -1,347 +1,223 @@
- version: 2
+version: 2
 
 sources:
   - name: sql_server_dbo
-    description: ""
-    database: alumno16_dev_bronze_db
+    description: >
+      raw data
+    schema: sql_server_dbo
+    database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+    freshness:
+      warn_after: { count: 5, period: day }
+      error_after: { count: 10, period: day }
     tables:
       - name: addresses
-        description: ""
+        loaded_at_field: _fivetran_synced
+        description: >
+          Address info for each customer
         columns:
-          - name: address_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
           - name: zipcode
-            data_type: number
-            description: ""
-            tests:
-              - not_null
+            description: > 
+              Zipcode number for each customer address
           - name: country
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: > 
+              Country for each customer address
           - name: address
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: > 
+              Exact address for each customer
           - name: state
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: > 
+              State for each customer address
           - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
+            description: > 
+              Date that the data was deleted
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
+            description: > 
+              Date that the data was loaded
 
       - name: events
-        description: ""
+        description: >
+          Data about events in the platform of demo.
         columns:
           - name: event_id
-            data_type: varchar
-            description: ""
+            description: > 
+              UUID of each unique event on the platform.
             tests:
+              - not_null
               - unique
+          - name: session_id
+            description: > 
+              UUID of each browsing session on the platform which can contain many events.
+            tests:
+              - not_null
+          - name: user_id
+            description: > 
+              UUID of the user that this event is associated with.
+            tests:
               - not_null
           - name: page_url
-            data_type: varchar
-            description: ""
+            description: > 
+              URL that the event happened on.
+            tests:
+              - not_null
+          - name: created_at
+            description: > 
+              Timestamp of the event (UTC).
             tests:
               - not_null
           - name: event_type
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
-          - name: user_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: product_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: session_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: created_at
-            data_type: timestamp_ntz
-            description: ""
+            description: > 
+              Type of event.
             tests:
               - not_null
           - name: order_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
-          - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
-
-      - name: order_items
-        description: ""
-        columns:
-          - name: order_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: > 
+              If the event is specific to an order (mostly used for checkout).
           - name: product_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: quantity
-            data_type: number
-            description: ""
-            tests:
-              - not_null
-          - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
+            description: > 
+              If the event is specific to a product.
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
+            description: > 
+              Date that the data was loaded.
+            tests:
+              - not_null
 
       - name: orders
-        description: ""
+        loaded_at_field: _fivetran_synced
+        description: >
+          Raw data for orders per customers
         columns:
           - name: order_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the id for Orders table
           - name: shipping_service
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represents the shipment of the order
           - name: shipping_cost
-            data_type: float
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represents the cost of shipping
           - name: address_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the id for Address table
           - name: created_at
-            data_type: timestamp_tz
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Date on which the order was placed
           - name: promo_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: estimated_delivery_at
-            data_type: timestamp_tz
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the id for Promo table
+          - name: estimated_delivery
+            description: >
+              Date on which the delivery of the order
           - name: order_cost
-            data_type: float
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the cost for the delivery
           - name: user_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the id for user table
           - name: order_total
-            data_type: float
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Total cost for delivery order
           - name: delivered_at
-            data_type: timestamp_tz
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Date on which the delivery was shipped
           - name: tracking_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the tracking id
           - name: status
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the status for the delivery
           - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
+
+      - name: order_items
+        loaded_at_field: _fivetran_synced
+        description: >
+          Represent the table for items was orders
+        columns:
+          - name: order_id
+            description: >
+              Represent the id for Order table
+          - name: product_id
+            description: >
+              Represent the Product id
+          - name: quantity
+            description: >
+              Quantity for each product
+          - name: _fivetran_deleted
+          - name: _fivetran_synced
 
       - name: products
-        description: ""
+        loaded_at_field: _fivetran_synced
+        description: >
+          Contains all info about products
         columns:
           - name: product_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Id for each product
           - name: price
-            data_type: float
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Price for each product
           - name: name
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Name for each product
           - name: inventory
-            data_type: number
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the quantity for each product on inventory
           - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
 
       - name: promos
-        description: ""
+        loaded_at_field: _fivetran_synced
+        description: >
+          All info about promo table
         columns:
           - name: promo_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the Promo id
           - name: discount
-            data_type: number
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Discount for each product
           - name: status
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the status for promos, active or inactive
           - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
 
       - name: users
-        description: ""
+        loaded_at_field: _fivetran_synced
+        description: >
+          All info about user table
         columns:
           - name: user_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: updated_at
-            data_type: timestamp_tz
-            description: ""
-            tests:
-              - not_null
+            description: >
+              ID from user table
+          - name: update_at
+            description: >
+              Date that was update user account
           - name: address_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
+            description: >
+              Represent the id from address table
           - name: last_name
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Last name of user
           - name: created_at
-            data_type: timestamp_tz
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Date that user account was created
           - name: phone_number
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Phone number for each user
           - name: total_orders
-            data_type: number
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Represent the amount of total orders
           - name: first_name
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              First name for each user
           - name: email
-            data_type: varchar
-            description: ""
-            tests:
-              - not_null
+            description: >
+              Email for each user
           - name: _fivetran_deleted
-            data_type: boolean
-            description: ""
           - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
-      
-      - name: budget
-        description: ""
-        columns:
-          - name: _row
-            data_type: number
-            description: ""
-            tests:
-              - not_null
-          - name: quantity
-            data_type: number
-            description: ""
-            tests:
-              - not_null
-          - name: month
-            data_type: date
-            description: ""
-            tests:
-              - not_null
-          - name: product_id
-            data_type: varchar
-            description: ""
-            tests:
-              - unique
-              - not_null
-          - name: _fivetran_synced
-            data_type: timestamp_tz
-            description: ""
+

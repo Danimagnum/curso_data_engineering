@@ -8,7 +8,7 @@ stg_products as (
 
     select
         product_id::Varchar(50) as product_id,
-        (replace(PRICE,',','.'))::decimal as price,
+        PRICE::decimal as price,
         name::varchar(100) as name,
         inventory::number(38,0) as inventory,
         _fivetran_deleted,
