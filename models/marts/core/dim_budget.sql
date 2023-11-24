@@ -14,7 +14,7 @@ dim_budget as (
     select
         quantity,
         month,
-        product_id,
+        product_id
     from stg_budget
 
 )

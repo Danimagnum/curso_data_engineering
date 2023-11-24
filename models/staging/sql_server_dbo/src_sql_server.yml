@@ -174,15 +174,18 @@ sources:
         description: >
           All info about promo table
         columns:
-          - name: promo_id
+          - name: promo_type
             description: >
-              Represent the Promo id
+              Represent the Promo type
           - name: discount
             description: >
               Discount for each product
           - name: status
             description: >
               Represent the status for promos, active or inactive
+          - name: promo_id
+            description: >
+              Represent the Promo id
           - name: _fivetran_deleted
           - name: _fivetran_synced
 

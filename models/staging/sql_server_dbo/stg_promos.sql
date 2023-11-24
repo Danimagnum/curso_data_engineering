@@ -18,7 +18,7 @@ stg_promos as (
 
 select 
     promo_type,
-    discount_usd,
+    discount,
     promo_status,
     promo_id
 from stg_promos

@@ -15,7 +15,6 @@ stg_events as (
         session_id::varchar(50) as session_id,
         created_at::timestamp_ntz as events_created_at,
         decode(order_id,'','no_order',order_id)::varchar(50) as order_id,
-        _fivetran_deleted,
         _fivetran_synced AS date_load
 
     from src_events

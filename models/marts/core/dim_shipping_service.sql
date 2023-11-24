@@ -14,7 +14,7 @@ dim_shipping_service as (
     select
         shipping_service,
         shipping_cost,
-        tracking_id,
+        tracking_id
     from stg_orders
 
 )
