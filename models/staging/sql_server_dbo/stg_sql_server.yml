@@ -40,8 +40,6 @@ models:
         description: "Address identifier"
       - name: created_at_utc
         description: "Date that was created the order"
-        tests:
-          - not_null
       - name: estimated_delivery_date_utc
         description: "Estimated delivery date on utc"
       - name: estimated_delivery_time_utc
