@@ -8,10 +8,10 @@ with src_promos as (
 
 stg_promos as (
     select
+        {{dbt_utils.generate_surrogate_key(['promo_id'])}}::STRING as promo_id,
         promo_id::VARCHAR (30) as promo_type,
         discount::FLOAT as discount,
         status::VARCHAR(50) as promo_status,
-        {{dbt_utils.generate_surrogate_key(['promo_id'])}}::STRING as promo_id,
         _fivetran_synced::timestamp_ntz(9) as date_load
     from src_promos
 )

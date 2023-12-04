@@ -58,6 +58,9 @@ sources:
               UUID of the user that this event is associated with.
             tests:
               - not_null
+              - relationships:
+                  field: user_id
+                  to: ref('stg_users')
           - name: page_url
             description: > 
               URL that the event happened on.
@@ -73,9 +76,15 @@ sources:
               Type of event.
             tests:
               - not_null
+              - accepted_values: 
+                  values: ['checkout', 'package_shipped','add_to_cart','page_view']
           - name: order_id
             description: > 
               If the event is specific to an order (mostly used for checkout).
+            tests:
+              - relationships:
+                  field: order_id
+                  to: ref('stg_orders')
           - name: product_id
             description: > 
               If the event is specific to a product.
@@ -102,24 +111,41 @@ sources:
           - name: address_id
             description: >
               Represent the id for Address table
+            tests:
+              - relationships:
+                  field: address_id
+                  to: ref('stg_addresses')
+
           - name: created_at
             description: >
               Date on which the order was placed
           - name: promo_id
             description: >
               Represent the id for Promo table
+            tests:
+              - relationships:
+                  field: promo_id
+                  to: ref('stg_promos')
           - name: estimated_delivery
             description: >
               Date on which the delivery of the order
           - name: order_cost
             description: >
               Represent the cost for the delivery
+            tests:
+              - positive_values
           - name: user_id
             description: >
               Represent the id for user table
+            tests:
+              - relationships:
+                  field: user_id
+                  to: ref('stg_users')
           - name: order_total
             description: >
               Total cost for delivery order
+            tests:
+              - positive_values
           - name: delivered_at
             description: >
               Date on which the delivery was shipped
@@ -140,12 +166,22 @@ sources:
           - name: order_id
             description: >
               Represent the id for Order table
+            tests:
+              - relationships:
+                  field: order_id
+                  to: ref('stg_orders')
           - name: product_id
             description: >
               Represent the Product id
+            tests:
+              - relationships:
+                  field: product_id
+                  to: ref('stg_products')
           - name: quantity
             description: >
               Quantity for each product
+            tests:
+              - positive_values
           - name: _fivetran_deleted
           - name: _fivetran_synced
 
@@ -160,12 +196,21 @@ sources:
           - name: price
             description: >
               Price for each product
+            tests:
+              - positive_values
           - name: name
             description: >
               Name for each product
+            tests:
+              - unique
+
           - name: inventory
             description: >
               Represent the quantity for each product on inventory
+            tests:
+              - not_null
+              - positive_values
+
           - name: _fivetran_deleted
           - name: _fivetran_synced
 
@@ -177,9 +222,14 @@ sources:
           - name: promo_type
             description: >
               Represent the Promo type
+            tests:
+              - not_null
+              - unique
           - name: discount
             description: >
               Discount for each product
+            tests:
+              - positive_values
           - name: status
             description: >
               Represent the status for promos, active or inactive
@@ -203,6 +253,10 @@ sources:
           - name: address_id
             description: >
               Represent the id from address table
+            tests:
+              - relationships:
+                  field: address_id
+                  to: ref('stg_addresses')
           - name: last_name
             description: >
               Last name of user
@@ -221,6 +275,9 @@ sources:
           - name: email
             description: >
               Email for each user
+            tests:
+              - not_null
+              - unique
           - name: _fivetran_deleted
           - name: _fivetran_synced
 
