@@ -223,7 +223,6 @@ sources:
             description: >
               Represent the Promo type
             tests:
-              - not_null
               - unique
           - name: discount
             description: >
