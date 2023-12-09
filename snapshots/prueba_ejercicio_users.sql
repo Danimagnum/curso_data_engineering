@@ -1,4 +1,4 @@
-/*{% snapshot users_snapshot %}
+{% snapshot users_snapshot %}
 
 {{
     config(
@@ -12,4 +12,4 @@
 select * from {{ ref( 'incremental_users') }}
 where f_carga > (select max(f_carga) from {{ 'incremental_users' }})
 
-{% endsnapshot %}*/
+{% endsnapshot %}

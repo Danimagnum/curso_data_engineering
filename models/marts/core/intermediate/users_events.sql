@@ -18,6 +18,8 @@ stg_users_events as (
         a.phone_number,
         a.first_name,
         a.email,
+        a.genere,
+        a.birth,
         b.event_id,
         b.page_url,
         b.event_type,

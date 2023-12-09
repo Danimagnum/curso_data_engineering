@@ -18,6 +18,8 @@ stg_users_addresses as (
         a.phone_number,
         a.first_name,
         a.email,
+        a.genere,
+        a.birth,
         b.zipcode,
         b.country,
         b.address,
