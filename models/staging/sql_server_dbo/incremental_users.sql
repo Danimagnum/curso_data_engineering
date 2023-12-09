@@ -1,3 +1,6 @@
+/*Este código se utiliza para realizar una carga incremental de datos desde una fuente a una tabla destino, 
+teniendo en cuenta la última sincronización (_fivetran_synced) y utilizando 'user_id' como clave única.*/
+
 {{ config(
     materialized='incremental',
     unique_key='user_id',

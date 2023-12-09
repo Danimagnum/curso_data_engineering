@@ -1,3 +1,5 @@
+/*Este código se utiliza para cargar datos desde la tabla 'order_items' en la fuente a la tabla destino 'stg_order_items'.*/
+
 with src_order_items as (
 
     select * from {{ source('sql_server_dbo', 'order_items') }}

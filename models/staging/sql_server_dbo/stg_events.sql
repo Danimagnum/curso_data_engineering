@@ -1,3 +1,6 @@
+/* Este código se utiliza para cargar datos desde la tabla 'events' en la fuente a la tabla destino 'stg_events'.
+ Se aplican algunas transformaciones en las columnas product_id y order_id utilizando la función DECODE.*/
+
 with src_events as (
 
     select * from {{ source('sql_server_dbo', 'events') }}

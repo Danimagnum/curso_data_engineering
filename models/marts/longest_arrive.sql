@@ -17,8 +17,8 @@ longest_arrive as (
 )
 SELECT
     state,
-    COUNT(*) AS total_envios,
-    AVG(TIMESTAMPDIFF(DAY,order_created_at,delivered_at) AS avg_delivered
+    AVG(TIMESTAMPDIFF(DAY,order_created_at,delivered_at)) AS avg_delivered
 FROM longest_arrive
-GROUP BY state,total_envios
+WHERE delivered_at IS NOT NULL
+GROUP BY state
 ORDER BY avg_delivered DESC

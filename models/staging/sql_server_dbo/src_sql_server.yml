@@ -222,8 +222,6 @@ sources:
           - name: promo_type
             description: >
               Represent the Promo type
-            tests:
-              - unique
           - name: discount
             description: >
               Discount for each product
@@ -235,6 +233,8 @@ sources:
           - name: promo_id
             description: >
               Represent the Promo id
+            tests:
+              - unique
           - name: _fivetran_deleted
           - name: _fivetran_synced
 
