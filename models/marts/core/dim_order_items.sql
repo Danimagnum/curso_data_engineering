@@ -1,3 +1,6 @@
+/* Este código se utiliza para cargar datos desde la tabla referenciada 
+'stg_order_items' en una tabla destino 'dim_order_items', y la tabla 
+destino se configura como una tabla regular (materialized='table').*/
 {{
   config(
     materialized='table'

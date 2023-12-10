@@ -1,3 +1,8 @@
+/*Este código se utiliza para analizar las órdenes en función 
+de la edad de los usuarios. Se clasifican las edades en grupos 
+específicos y se cuentan las órdenes para cada grupo. 
+La consulta final presenta el número total de órdenes para 
+cada grupo de edad.*/
 WITH users_events as (
 
     SELECT * FROM {{ ref('users_events') }}

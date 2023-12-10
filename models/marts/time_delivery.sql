@@ -1,3 +1,8 @@
+/*Este código se utiliza para cargar datos desde la tabla referenciada 
+'stg_orders' en una tabla destino 'time_delivery', y la tabla destino 
+se configura como una tabla regular (materialized='table'). Luego, se 
+realiza una consulta que calcula y presenta el tiempo promedio de 
+entrega en días. La columna resultante se llama 'days_AVG'.*/
 {{
   config(
     materialized='table'

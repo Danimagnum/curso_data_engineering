@@ -1,3 +1,6 @@
+/*Este código se utiliza para cargar datos desde la tabla referenciada 
+'genere_birth' en una tabla destino 'base_genere_birth'*/
+
 {{
   config(
     materialized='table'

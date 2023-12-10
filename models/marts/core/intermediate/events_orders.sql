@@ -1,3 +1,8 @@
+/* este código se utiliza para combinar datos de las tablas 
+'stg_events' y 'stg_orders' mediante la columna 'order_id' 
+y presenta los resultados en una nueva tabla llamada 
+'stg_events_orders'. La tabla final incluirá información
+ de eventos y órdenes relacionadas.*/
 WITH stg_events as (
 
     SELECT * FROM {{ ref('stg_events') }}

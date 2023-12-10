@@ -1,3 +1,7 @@
+/*este código se utiliza para combinar datos de las tablas 
+'stg_users' y 'stg_addresses' mediante la columna 'address_id' 
+y presenta los resultados en una nueva tabla llamada 'stg_users_addresses'. 
+La tabla final incluirá información de usuarios y direcciones relacionadas.*/
 WITH stg_users as (
 
     SELECT * FROM {{ ref('stg_users') }}

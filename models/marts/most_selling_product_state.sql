@@ -1,3 +1,8 @@
+/*Este código se utiliza para calcular y presentar la cantidad total 
+de productos vendidos por estado. Combina información de las tablas 
+'orders_addresses' y 'stg_order_items' para obtener la información 
+necesaria y luego realiza cálculos de agregación para determinar la 
+cantidad total vendida por estado y producto.*/
 WITH orders_addresses as (
 
     SELECT * FROM {{ ref('orders_addresses') }}

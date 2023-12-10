@@ -1,3 +1,7 @@
+/*Este código se utiliza para combinar datos de las tablas 
+'stg_users' y 'stg_events' mediante la columna 'user_id'
+ y presenta los resultados en una nueva tabla llamada 'stg_users_events'.
+  La tabla final incluirá información de usuarios y eventos relacionados.*/
 WITH stg_users as (
 
     SELECT * FROM {{ ref('stg_users') }}

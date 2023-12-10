@@ -1,3 +1,6 @@
+/* Este código se utiliza para combinar datos de las tablas 'stg_products' 
+y 'stg_budget' mediante la columna 'product_id' y presenta los resultados 
+en una nueva tabla llamada 'stg_products_budget'.*/
 WITH stg_products as (
 
     SELECT * FROM {{ ref('stg_products') }}

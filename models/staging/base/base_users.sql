@@ -1,3 +1,5 @@
+/*Este código se utiliza para cargar datos desde la tabla 'users' 
+en la fuente de datos a la tabla destino 'base_users'. */
 with src_users as (
 
     select * from {{ source('sql_server_dbo', 'users') }}

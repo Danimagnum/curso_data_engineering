@@ -1,3 +1,5 @@
+/*Este código se utiliza para cargar datos desde la tabla 
+'promos' en la fuente a la tabla destino 'stg_promos'. */
 {{ config(
   materialized='table'
 ) }}

@@ -1,3 +1,6 @@
+/*Este código se utiliza para cargar datos desde la tabla referenciada 
+'products_budget' en una tabla destino 'fct_budget', y la tabla destino
+ se configura como una tabla regular (materialized='table').*/
 {{
   config(
     materialized='table'

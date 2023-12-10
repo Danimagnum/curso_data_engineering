@@ -1,3 +1,7 @@
+/*Este código se utiliza para cargar datos desde la tabla 
+referenciada 'orders_orders_items' en una tabla destino 
+'fct_orders', y la tabla destino se configura como una tabla 
+regular (materialized='table')*/
 WITH orders_orders_items as (
 
     SELECT * FROM {{ ref('orders_orders_items') }}

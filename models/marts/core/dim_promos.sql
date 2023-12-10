@@ -1,3 +1,6 @@
+/*Este código se utiliza para cargar datos desde la tabla referenciada 
+'stg_promos' en una tabla destino 'dim_promos', y la tabla destino 
+se configura como una tabla regular (materialized='table')*/
 {{
   config(
     materialized='table'

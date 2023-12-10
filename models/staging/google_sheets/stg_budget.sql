@@ -1,3 +1,5 @@
+/*Este código se utiliza para cargar datos desde la tabla 'budget' 
+en Google Sheets a la tabla destino 'stg_budget'.*/
 with src_budget as (
 
     select * from {{ source('google_sheets', 'budget') }}

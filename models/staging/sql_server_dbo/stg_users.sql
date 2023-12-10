@@ -1,3 +1,6 @@
+/*este código se utiliza para realizar una combinación de todas las filas 
+de 'base_users' con todas las filas de 'base_genere_birth' y cargar el 
+resultado en la tabla destino 'stg_users'. */
 {{
   config(
     materialized='table'

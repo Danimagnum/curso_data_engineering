@@ -1,3 +1,4 @@
+/**/
 {{
   config(
     materialized='table'
@@ -20,4 +21,4 @@ SELECT
     COUNT(order_id) as n_pedidos
 FROM orders_users
 group by user_id
---having n_pedidos = 1 OR n_pedidos = 2 OR n_pedidos = 3
+having n_pedidos = 1 OR n_pedidos = 2 OR n_pedidos = 3
