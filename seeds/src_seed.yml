@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: seeds
+    description: >
+      raw data
+    schema: seeds
+    database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+    freshness:
+      warn_after: { count: 5, period: day }
+      error_after: { count: 10, period: day }
+    tables:
+      - name: genere_birth
+        loaded_at_field: _fivetran_synced
+        description: >
+          seed table
+        columns:
+          - name: genere
+            description: > 
+              gerene of the user
+          - name: birth
+            description: > 
+              Year of birth
+      
