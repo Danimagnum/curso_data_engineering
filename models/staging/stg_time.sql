@@ -8,7 +8,7 @@ with src_time as (
 
 ),
 
-stg_time as (
+date as (
 
     select 
         date_day as dia,
@@ -21,5 +21,5 @@ stg_time as (
 
 )
 
-select * from stg_time
+select * from date
 

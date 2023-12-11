@@ -24,7 +24,7 @@ longest_arrive as (
 )
 SELECT
     state,
-    AVG(TIMESTAMPDIFF(DAY,order_created_at,delivered_at)) AS avg_delivered
+    ROUND(AVG(TIMESTAMPDIFF(DAY,order_created_at,delivered_at)),2) AS avg_delivered
 FROM longest_arrive
 WHERE delivered_at IS NOT NULL
 GROUP BY state

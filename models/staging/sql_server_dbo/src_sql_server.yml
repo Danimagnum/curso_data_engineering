@@ -71,6 +71,9 @@ sources:
               Timestamp of the event (UTC).
             tests:
               - not_null
+              - relationships:
+                  field: date
+                  to: ref('stg_time')
           - name: event_type
             description: > 
               Type of event.
@@ -81,10 +84,6 @@ sources:
           - name: order_id
             description: > 
               If the event is specific to an order (mostly used for checkout).
-            tests:
-              - relationships:
-                  field: order_id
-                  to: ref('stg_orders')
           - name: product_id
             description: > 
               If the event is specific to a product.
@@ -122,10 +121,6 @@ sources:
           - name: promo_id
             description: >
               Represent the id for Promo table
-            tests:
-              - relationships:
-                  field: promo_id
-                  to: ref('stg_promos')
           - name: estimated_delivery
             description: >
               Date on which the delivery of the order

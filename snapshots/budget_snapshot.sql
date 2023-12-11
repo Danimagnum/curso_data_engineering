@@ -1,4 +1,4 @@
-{% snapshot budget_snapshot2 %}
+{% snapshot budget_snapshot %}
 
 {{
     config(
