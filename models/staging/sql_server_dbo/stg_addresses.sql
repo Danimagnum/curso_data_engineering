@@ -1,5 +1,10 @@
 /*Este código se utiliza para cargar datos desde la tabla 'addresses' en la fuente 
 a la tabla destino 'stg_addresses', realizando algunas transformaciones en el proceso. */
+{{
+  config(
+    materialized='view',
+  )
+}}
 
 with src_addresses as (
 

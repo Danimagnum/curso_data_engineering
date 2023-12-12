@@ -1,5 +1,11 @@
 /*Este código se utiliza para cargar datos desde la tabla 'budget' 
 en Google Sheets a la tabla destino 'stg_budget'.*/
+{{
+  config(
+    materialized='incremental',
+    unique_key='product_id'
+  )
+}}
 with src_budget as (
 
     select * from {{ source('google_sheets', 'budget') }}
@@ -16,7 +22,11 @@ stg_budget as (
         _fivetran_synced AS date_load
 
     from src_budget
+{% if is_incremental() %}
 
+	  where _fivetran_synced > (select max(date_load) from {{ this }})
+
+{% endif %}
 )
 
 select * from stg_budget

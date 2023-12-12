@@ -8,18 +8,18 @@ with src_time as (
 
 ),
 
-date as (
+stg_time as (
 
     select 
-        date_day as dia,
-        day_of_week,
-        month_of_year,
-        year_number
+       date_day,
+       day_of_month,
+       month_of_year,
+       year_number,
+       quarter_of_year
 
-        
     from src_time
 
 )
 
-select * from date
+select * from stg_time
 

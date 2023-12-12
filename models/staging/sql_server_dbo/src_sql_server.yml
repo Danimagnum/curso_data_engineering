@@ -72,8 +72,8 @@ sources:
             tests:
               - not_null
               - relationships:
-                  field: date
                   to: ref('stg_time')
+                  field: date_day    
           - name: event_type
             description: > 
               Type of event.
@@ -118,12 +118,22 @@ sources:
           - name: created_at
             description: >
               Date on which the order was placed
+            tests:
+              - relationships:
+                  to: ref('stg_time')
+                  field: date_day
+                  
           - name: promo_id
             description: >
               Represent the id for Promo table
           - name: estimated_delivery
             description: >
               Date on which the delivery of the order
+            tests:
+              - relationships:
+                  to: ref('stg_time')
+                  field: date_day
+                  
           - name: order_cost
             description: >
               Represent the cost for the delivery
@@ -144,6 +154,10 @@ sources:
           - name: delivered_at
             description: >
               Date on which the delivery was shipped
+            tests:
+              - relationships:
+                  to: ref('stg_time')
+                  field: date_day
           - name: tracking_id
             description: >
               Represent the tracking id
@@ -163,8 +177,8 @@ sources:
               Represent the id for Order table
             tests:
               - relationships:
-                  field: order_id
                   to: ref('stg_orders')
+                  field: order_id
           - name: product_id
             description: >
               Represent the Product id
@@ -244,19 +258,27 @@ sources:
           - name: update_at
             description: >
               Date that was update user account
+            tests:
+              - relationships:
+                  to: ref('stg_time')
+                  field: date_day      
           - name: address_id
             description: >
               Represent the id from address table
             tests:
               - relationships:
-                  field: address_id
                   to: ref('stg_addresses')
+                  field: address_id
           - name: last_name
             description: >
               Last name of user
           - name: created_at
             description: >
               Date that user account was created
+            tests:
+              - relationships:
+                  to: ref('stg_time')
+                  field: date_day
           - name: phone_number
             description: >
               Phone number for each user

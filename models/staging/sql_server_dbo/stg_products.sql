@@ -1,5 +1,11 @@
 /*Este código se utiliza para cargar datos desde la tabla 
 'products' en la fuente a la tabla destino 'stg_products'.*/
+{{
+  config(
+    materialized='view',
+  )
+}}
+
 with src_products as (
 
     select * from {{ source('sql_server_dbo', 'products') }}
