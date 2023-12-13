@@ -70,10 +70,7 @@ sources:
             description: > 
               Timestamp of the event (UTC).
             tests:
-              - not_null
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day    
+              - not_null  
           - name: event_type
             description: > 
               Type of event.
@@ -117,23 +114,13 @@ sources:
 
           - name: created_at
             description: >
-              Date on which the order was placed
-            tests:
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day
-                  
+              Date on which the order was placed                  
           - name: promo_id
             description: >
               Represent the id for Promo table
           - name: estimated_delivery
             description: >
-              Date on which the delivery of the order
-            tests:
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day
-                  
+              Date on which the delivery of the order                  
           - name: order_cost
             description: >
               Represent the cost for the delivery
@@ -154,10 +141,6 @@ sources:
           - name: delivered_at
             description: >
               Date on which the delivery was shipped
-            tests:
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day
           - name: tracking_id
             description: >
               Represent the tracking id
@@ -257,11 +240,7 @@ sources:
               ID from user table
           - name: update_at
             description: >
-              Date that was update user account
-            tests:
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day      
+              Date that was update user account     
           - name: address_id
             description: >
               Represent the id from address table
@@ -275,10 +254,6 @@ sources:
           - name: created_at
             description: >
               Date that user account was created
-            tests:
-              - relationships:
-                  to: ref('stg_time')
-                  field: date_day
           - name: phone_number
             description: >
               Phone number for each user
@@ -296,4 +271,22 @@ sources:
               - unique
           - name: _fivetran_deleted
           - name: _fivetran_synced
+      - name: stg_time
+        description: "staging of time"
+        columns:
+          - name: date_day
+            description: >
+              complete date
+          - name: day_of_month
+            description: >
+              day of the month
+          - name: month_of_year
+            description: >
+              month of the year
+          - name: year_number
+            description: >
+              year
+          - name: quarter_of_year
+            description: >
+              quarter
 

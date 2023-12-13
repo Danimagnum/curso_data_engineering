@@ -1,6 +1,12 @@
 /*Este código se utiliza para cargar datos desde la tabla 
 referenciada 'users_events' en una tabla destino 'fct_events',
  y la tabla destino se configura como una tabla regular (materialized='table'). */
+{{
+  config(
+    materialized='incremental',
+    unique_key='event_id',
+  )
+}}
 with users_events as (
 
     select * from {{ ref('users_events') }}

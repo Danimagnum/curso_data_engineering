@@ -1,0 +1,306 @@
+version: 2
+
+models:
+  - name: dim_addresses
+    description: "Dimension table for storing address information."
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address."
+
+      - name: zipcode
+        data_type: varchar
+        description: "ZIP code of the address."
+
+      - name: country
+        data_type: varchar
+        description: "Country of the address."
+
+      - name: address
+        data_type: varchar
+        description: "Street address."
+
+      - name: state
+        data_type: varchar
+        description: "State or region of the address."
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: "Flag indicating whether the record has been deleted."
+
+      - name: date_load
+        data_type: timestamp_tz
+        description: "Timestamp indicating when the data was loaded."
+
+  - name: dim_order_items
+    description: "Dimension table for storing order item information."
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity of the product in the order."
+
+  - name: dim_products
+    description: "Dimension table for storing product information."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: price
+        data_type: number
+        description: "Price of the product."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the product."
+
+      - name: inventory
+        data_type: number
+        description: "Inventory count of the product."
+
+      - name: _fivetran_deleted
+        data_type: boolean
+        description: "Flag indicating whether the record has been deleted."
+
+      - name: date_load
+        data_type: timestamp_tz
+        description: "Timestamp indicating when the data was loaded."
+
+  - name: dim_promos
+    description: "Dimension table for storing promotion information."
+    columns:
+      - name: promo_type
+        data_type: varchar
+        description: "Type of promotion."
+
+      - name: discount
+        data_type: float
+        description: "Discount amount for the promotion."
+
+      - name: promo_status
+        data_type: varchar
+        description: "Status of the promotion."
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion."
+
+  - name: dim_shipping_service
+    description: "Dimension table for storing shipping service information."
+    columns:
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service."
+
+      - name: shipping_cost
+        data_type: number
+        description: "Cost of the shipping service."
+
+      - name: tracking_id
+        data_type: varchar
+        description: "Tracking ID for the shipment."
+
+  - name: dim_time
+    description: "Dimension table for storing time-related information."
+    columns:
+      - name: date_day
+        data_type: date
+        description: "Date information."
+
+      - name: day_of_month
+        data_type: number
+        description: "Day of the month."
+
+      - name: month_of_year
+        data_type: number
+        description: "Month of the year."
+
+      - name: year_number
+        data_type: number
+        description: "Year number."
+
+      - name: quarter_of_year
+        data_type: number
+        description: "Quarter of the year."
+
+  - name: fct_budget
+    description: "Fact table for storing budget-related information."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the budget."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity associated with the budget."
+
+      - name: price
+        data_type: number
+        description: "Price associated with the budget."
+
+      - name: month
+        data_type: timestamp_ntz
+        description: "Month information for the budget."
+
+  - name: fct_events
+    description: "Fact table for storing event-related information."
+    columns:
+      - name: event_id
+        data_type: varchar
+        description: "Unique identifier for the event."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user."
+
+      - name: event_type
+        data_type: varchar
+        description: "Type of the event."
+
+      - name: session_id
+        data_type: varchar
+        description: "Unique identifier for the session."
+
+      - name: events_created_at
+        data_type: date
+        description: "Timestamp indicating when the event was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order associated with the event."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the event."
+
+  - name: fct_order_items
+    description: "Fact table for storing order item-related information."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: price
+        data_type: number
+        description: "Price of the product in the order."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the product."
+
+      - name: inventory
+        data_type: number
+        description: "Inventory count of the product."
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity of the product in the order."
+
+  - name: fct_orders
+    description: "Fact table for storing order-related information."
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service for the order."
+
+      - name: shipping_cost
+        data_type: number
+        description: "Cost of the shipping service for the order."
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the order."
+
+      - name: order_created_at
+        data_type: date
+        description: "Timestamp indicating when the order was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion associated with the order."
+
+      - name: estimated_delivery_at
+        data_type: date
+        description: "Estimated delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_cost
+        data_type: number
+        description: "Cost of the order."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user placing the order."
+
+      - name: order_total
+        data_type: number
+        description: "Total cost of the order."
+
+      - name: delivered_at
+        data_type: date
+        description: "Actual delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: tracking_id
+        data_type: varchar
+        description: "Tracking ID for the shipment."
+
+      - name: status
+        data_type: varchar
+        description: "Status of the order."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the order."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity of the product in the order."
+
+  - name: dim_time
+    description: "Dimension table of time"
+    columns:
+      - name: date_day
+        description: complete date
+      - name: day_of_month
+        description: day of the month
+      - name: month_of_year
+        description: month of the year
+      - name: year_number
+        description: year
+      - name: quarter_of_year
+        description: quarter

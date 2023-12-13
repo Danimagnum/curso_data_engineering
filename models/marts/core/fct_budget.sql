@@ -3,7 +3,8 @@
  se configura como una tabla regular (materialized='table').*/
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key='product_id'
   )
 }}
 with products_budget as (

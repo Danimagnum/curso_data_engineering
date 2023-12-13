@@ -1,0 +1,467 @@
+version: 2
+
+models:
+  - name: events_orders
+    description: "Fact table for storing information about events and associated orders."
+    columns:
+      - name: event_id
+        data_type: varchar
+        description: "Unique identifier for the event."
+
+      - name: page_url
+        data_type: varchar
+        description: "URL of the page associated with the event."
+
+      - name: event_type
+        data_type: varchar
+        description: "Type of the event."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user associated with the event."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the event."
+
+      - name: session_id
+        data_type: varchar
+        description: "Unique identifier for the session associated with the event."
+
+      - name: events_created_at
+        data_type: date
+        description: "Timestamp indicating when the event was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order associated with the event."
+
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service for the order."
+
+      - name: shipping_cost
+        data_type: number
+        description: "Cost of the shipping service for the order."
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the order."
+
+      - name: order_created_at
+        data_type: date
+        description: "Timestamp indicating when the order was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion associated with the order."
+
+      - name: estimated_delivery_at
+        data_type: date
+        description: "Estimated delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_cost
+        data_type: number
+        description: "Cost of the order."
+
+      - name: order_total
+        data_type: number
+        description: "Total cost of the order."
+
+      - name: delivered_at
+        data_type: date
+        description: "Actual delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: tracking_id
+        data_type: varchar
+        description: "Tracking ID for the shipment."
+
+      - name: status
+        data_type: varchar
+        description: "Status of the order."
+
+  - name: orders_addresses
+    description: "Fact table for storing information about orders and associated addresses."
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service for the order."
+
+      - name: shipping_cost
+        data_type: number
+        description: "Cost of the shipping service for the order."
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the order."
+
+      - name: order_created_at
+        data_type: date
+        description: "Timestamp indicating when the order was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion associated with the order."
+
+      - name: estimated_delivery_at
+        data_type: date
+        description: "Estimated delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_cost
+        data_type: number
+        description: "Cost of the order."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user placing the order."
+
+      - name: order_total
+        data_type: number
+        description: "Total cost of the order."
+
+      - name: delivered_at
+        data_type: date
+        description: "Actual delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: tracking_id
+        data_type: varchar
+        description: "Tracking ID for the shipment."
+
+      - name: status
+        data_type: varchar
+        description: "Status of the order."
+
+      - name: zipcode
+        data_type: varchar
+        description: "ZIP code of the address associated with the order."
+
+      - name: country
+        data_type: varchar
+        description: "Country of the address associated with the order."
+
+      - name: address
+        data_type: varchar
+        description: "Street address associated with the order."
+
+      - name: state
+        data_type: varchar
+        description: "State or region of the address associated with the order."
+
+  - name: orders_order_items
+    description: "Fact table for storing information about orders and associated order items."
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service for the order."
+
+      - name: shipping_cost
+        data_type: number
+        description: "Cost of the shipping service for the order."
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the order."
+
+      - name: order_created_at
+        data_type: date
+        description: "Timestamp indicating when the order was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion associated with the order."
+
+      - name: estimated_delivery_at
+        data_type: date
+        description: "Estimated delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_cost
+        data_type: number
+        description: "Cost of the order."
+
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user placing the order."
+
+      - name: order_total
+        data_type: number
+        description: "Total cost of the order."
+
+      - name: delivered_at
+        data_type: date
+        description: "Actual delivery date for the order."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: tracking_id
+        data_type: varchar
+        description: "Tracking ID for the shipment."
+
+      - name: status
+        data_type: varchar
+        description: "Status of the order."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the order."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity of the product in the order."
+
+  - name: products_budget
+    description: "Fact table for storing budget-related information about products."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: price
+        data_type: number
+        description: "Price of the product."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the product."
+
+      - name: inventory
+        data_type: number
+        description: "Inventory count of the product."
+
+      - name: _row
+        data_type: number
+        description: "Row identifier for the budget entry."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity associated with the budget entry."
+
+      - name: month
+        data_type: timestamp_ntz
+        description: "Month information for the budget entry."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+  - name: products_order_items
+    description: "Fact table for storing information about products and associated order items."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+
+      - name: price
+        data_type: number
+        description: "Price of the product in the order."
+
+      - name: name
+        data_type: varchar
+        description: "Name of the product."
+
+      - name: inventory
+        data_type: number
+        description: "Inventory count of the product."
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order."
+
+      - name: quantity
+        data_type: number
+        description: "Quantity of the product in the order."
+
+  - name: users_addresses
+    description: "Dimension table for storing information about users and associated addresses."
+    columns:
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user."
+
+      - name: updated_at
+        data_type: date
+        description: "Timestamp indicating when the user information was last updated."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the user."
+
+      - name: last_name
+        data_type: varchar
+        description: "Last name of the user."
+
+      - name: created_at
+        data_type: date
+        description: "Timestamp indicating when the user was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: phone_number
+        data_type: varchar
+        description: "Phone number of the user."
+
+      - name: first_name
+        data_type: varchar
+        description: "First name of the user."
+
+      - name: email
+        data_type: varchar
+        description: "Email address of the user."
+
+      - name: gender
+        data_type: varchar
+        description: "Gender of the user."
+
+      - name: birth
+        data_type: number
+        description: "Birth year of the user."
+
+      - name: zipcode
+        data_type: varchar
+        description: "ZIP code of the address associated with the user."
+
+      - name: country
+        data_type: varchar
+        description: "Country of the address associated with the user."
+
+      - name: address
+        data_type: varchar
+        description: "Street address associated with the user."
+
+      - name: state
+        data_type: varchar
+        description: "State or region of the address associated with the user."
+
+  - name: users_events
+    description: "Fact table for storing information about users and associated events."
+    columns:
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user."
+
+      - name: updated_at
+        data_type: date
+        description: "Timestamp indicating when the user information was last updated."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: address_id
+        data_type: varchar
+        description: "Unique identifier for the address associated with the user."
+
+      - name: last_name
+        data_type: varchar
+        description: "Last name of the user."
+
+      - name: created_at
+        data_type: date
+        description: "Timestamp indicating when the user was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: phone_number
+        data_type: varchar
+        description: "Phone number of the user."
+
+      - name: first_name
+        data_type: varchar
+        description: "First name of the user."
+
+      - name: email
+        data_type: varchar
+        description: "Email address of the user."
+
+      - name: gender
+        data_type: varchar
+        description: "Gender of the user."
+
+      - name: birth
+        data_type: number
+        description: "Birth year of the user."
+
+      - name: event_id
+        data_type: varchar
+        description: "Unique identifier for the event associated with the user."
+
+      - name: page_url
+        data_type: varchar
+        description: "URL of the page associated with the event."
+
+      - name: event_type
+        data_type: varchar
+        description: "Type of the event."
+
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the event."
+
+      - name: session_id
+        data_type: varchar
+        description: "Unique identifier for the session associated with the event."
+
+      - name: events_created_at
+        data_type: date
+        description: "Timestamp indicating when the event was created."
+        tests:
+         - relationships:
+            to: ref('dim_date')
+            field: date_day
+
+      - name: order_id
+        data_type: varchar
+        description: "Unique identifier for the order associated with the event."

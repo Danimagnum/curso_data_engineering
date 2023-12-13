@@ -3,7 +3,8 @@
 destino se configura como una tabla regular (materialized='table').*/
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key='order_id'
   )
 }}
 with stg_order_items as (
