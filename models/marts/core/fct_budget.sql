@@ -3,8 +3,7 @@
  se configura como una tabla regular (materialized='table').*/
 {{
   config(
-    materialized='incremental',
-    unique_key='product_id'
+    materialized='table',
   )
 }}
 with products_budget as (
@@ -23,7 +22,6 @@ fct_budget as (
         month
                
     from products_budget
-
 )
 
 select * from fct_budget

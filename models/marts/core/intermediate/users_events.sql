@@ -30,7 +30,8 @@ stg_users_events as (
         b.product_id,
         b.session_id,
         b.events_created_at,
-        b.order_id
+        b.order_id,
+        b.date_load
     FROM stg_users a
     INNER JOIN stg_events b
         ON a.user_id=b.user_id

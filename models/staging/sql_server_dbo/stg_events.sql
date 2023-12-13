@@ -26,6 +26,7 @@ stg_events as (
         _fivetran_synced AS date_load
 
     from src_events
+    
 {% if is_incremental() %}
 
 	  where _fivetran_synced > (select max(date_load) from {{ this }})

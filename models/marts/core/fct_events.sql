@@ -3,8 +3,7 @@ referenciada 'users_events' en una tabla destino 'fct_events',
  y la tabla destino se configura como una tabla regular (materialized='table'). */
 {{
   config(
-    materialized='incremental',
-    unique_key='event_id',
+    materialized='table',
   )
 }}
 with users_events as (
@@ -22,10 +21,10 @@ fct_events as (
         session_id,
         events_created_at,
         order_id,
-        product_id
+        product_id,
+        date_load
 
     from users_events
 
 )
-
 select * from fct_events

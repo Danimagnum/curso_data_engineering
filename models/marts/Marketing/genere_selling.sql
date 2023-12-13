@@ -19,6 +19,6 @@ SELECT
     genere,
     COUNT(order_id) AS total_orders
 FROM orders_birth
-WHERE genere IS NOT NULL
+WHERE genere IS NOT NULL 
 GROUP BY genere
 ORDER BY total_orders 
