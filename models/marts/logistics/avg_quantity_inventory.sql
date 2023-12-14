@@ -1,3 +1,7 @@
+/*este código se utiliza para calcular la diferencia promedio 
+entre las columnas 'inventory' y 'quantity' para cada producto 
+en la tabla 'products_budget' y presenta los resultados en una 
+tabla final.*/
 {{
   config(
     materialized='table'
@@ -15,5 +19,7 @@ avg_quantity_inventory as (
 
 )
 SELECT
-    AVG(inventory - quantity) AS avg_inventory_diff
+    product_id,
+    (inventory - quantity) AS avg_inventory_diff
 FROM avg_quantity_inventory
+ORDER BY avg_inventory_diff ASC

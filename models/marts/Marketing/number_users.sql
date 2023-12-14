@@ -3,7 +3,7 @@
 configura como una tabla regular (materialized='table'). Luego, se 
 realiza una consulta que cuenta y presenta el número total de registros 
 en la CTE number_users.*/
-{{
+{{  
   config(
     materialized='table'
   )

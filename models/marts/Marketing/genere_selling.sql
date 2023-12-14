@@ -1,6 +1,11 @@
 /*Este código se utiliza para analizar las pedidos en función 
 del genero de los usuarios.La consulta final presenta el número 
 total de pedidos para hombre y mujer.*/
+{{
+  config(
+    materialized='table'
+  )
+}}
 WITH users_events as (
 
     SELECT * FROM {{ ref('users_events') }}

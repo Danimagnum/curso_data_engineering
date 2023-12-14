@@ -3,6 +3,11 @@ de productos vendidos por estado. Combina información de las tablas
 'orders_addresses' y 'stg_order_items' para obtener la información 
 necesaria y luego realiza cálculos de agregación para determinar la 
 cantidad total vendida por estado y producto.*/
+{{
+  config(
+    materialized='table'
+  )
+}}
 WITH orders_addresses as (
 
     SELECT * FROM {{ ref('orders_addresses') }}

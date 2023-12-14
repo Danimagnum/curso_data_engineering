@@ -1,0 +1,187 @@
+version: 2
+
+models:
+  - name: genere_selling
+    description: "Aggregate table for storing total orders per gender."
+    columns:
+      - name: genere
+        data_type: varchar
+        description: "Gender category."
+        tests:
+              - not_null
+      - name: total_orders
+        data_type: number
+        description: "Total number of orders for the gender category."
+        tests:
+              - positive_values
+  - name: most_promos_users
+    description: "Aggregate table for tracking users with the most promotions and associated information."
+    columns:
+      - name: user_id
+        data_type: varchar
+        description: "Unique identifier for the user."
+        tests:
+              - not_null
+      - name: gender
+        data_type: varchar
+        description: "Gender of the user."
+      - name: birth
+        data_type: number
+        description: "Birth year of the user."
+        tests:
+              - positive_values
+
+      - name: promo_id
+        data_type: varchar
+        description: "Unique identifier for the promotion associated with the order."
+        tests:
+              - not_null
+
+      - name: total_orders
+        data_type: number
+        description: "Total number of orders for the user."
+        tests:
+              - positive_values
+
+  - name: most_selling_product_state
+    description: "Aggregate table for tracking the most selling products per state."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product."
+        tests:
+              - not_null
+
+      - name: state
+        data_type: varchar
+        description: "State or region associated with the product."
+        tests:
+              - not_null
+
+      - name: total_quantity
+        data_type: number
+        description: "Total quantity sold for the product in the state."
+        tests:
+              - not_null
+              - positive_values
+
+  - name: most_users_state
+    description: "Aggregate table for counting users per state."
+    columns:
+      - name: state
+        data_type: varchar
+        description: "State or region of the address associated with the user."
+        tests:
+              - not_null
+
+      - name: user_count
+        data_type: varchar
+        description: "Count of users in the state."
+        tests:
+              - not_null
+              - positive_values
+
+  - name: number_users
+    description: "Dimension table for storing unique user identifiers."
+    columns:
+      - name: user_id
+        data_type: number
+        description: "Unique identifier for the user."
+        tests:
+              - not_null
+
+  - name: orders_birth
+    description: "Aggregate table for tracking total orders per age group."
+    columns:
+      - name: age_group
+        data_type: varchar
+        description: "Age group category."
+        tests:
+              - not_null
+
+      - name: total_orders
+        data_type: number
+        description: "Total number of orders for the age group."
+        tests:
+              - positive_values
+
+  - name: orders_state
+    description: "Aggregate table for tracking total orders per state."
+    columns:
+      - name: state
+        data_type: varchar
+        description: "State or region associated with the orders."
+        tests:
+              - not_null
+
+      - name: total_orders
+        data_type: number
+        description: "Total number of orders for the state."
+        tests:
+              - positive_values
+
+  - name: unique_session
+    description: "Dimension table for storing unique session hours."
+    columns:
+      - name: session_hour
+        data_type: number
+        description: "Unique identifier for the session hour."
+        tests:
+              - positive_values
+
+  - name: avg_quantity_inventory
+    description: "Aggregate table for tracking average quantity and inventory differences per product."
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Unique identifier for the product associated with the order."
+        tests:
+              - not_null
+
+      - name: avg_inventory_diff
+        data_type: number
+        description: "Average difference between inventory and quantity for the product."
+        tests:
+              - not_null
+
+  - name: longest_arrive
+    description: "Aggregate table for tracking the average delivery time per state."
+    columns:
+      - name: state
+        data_type: varchar
+        description: "State or region associated with the delivery time."
+        tests:
+              - not_null
+
+      - name: avg_delivered
+        data_type: number
+        description: "Average delivery time in days for the state."
+        tests:
+              - not_null
+              - positive_values
+
+  - name: time_delivery
+    description: "Aggregate table for tracking the average delivery time across all orders."
+    columns:
+      - name: days_avg
+        data_type: number
+        description: "Average delivery time in days across all orders."
+        tests:
+              - not_null
+              - positive_values
+
+  - name: cheapest_shipping_service
+    description: "Aggregate table for tracking the average cost per shipping service."
+    columns:
+      - name: shipping_service
+        data_type: varchar
+        description: "Type of shipping service."
+        tests:
+              - not_null
+
+      - name: avg_cost
+        data_type: number
+        description: "Average cost for the shipping service."
+        tests:
+              - not_null
+              - positive_values

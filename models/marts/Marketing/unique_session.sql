@@ -4,6 +4,11 @@ referenciada 'users_events' en una CTE llamada 'unique_session',
  cuentan las sesiones únicas para cada hora. Luego, se realiza 
  una consulta que calcula el promedio de sesiones únicas por hora. 
  La columna resultante se llama 'session_hour'.*/
+ {{
+  config(
+    materialized='table'
+  )
+}}
 with users_events as (
 
     select * from {{ ref('users_events') }}
